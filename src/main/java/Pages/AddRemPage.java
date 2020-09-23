@@ -17,18 +17,27 @@ import java.io.IOException;
 public class AddRemPage extends BasePage {
     private By addElement  = By.xpath("//button[@onclick='addElement()']");
     private By removeElement = By.xpath("//button[@onclick='deleteElement()']");
+
     public AddRemPage(WebDriver driver) {
         super(driver);
     }
-    public void btnAddRemoveElement(){
-        WebDriverWait wait=new WebDriverWait(driver,5);
+
+    public void btnAddElement(){
+        WebDriverWait wait=new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(addElement)));
         driver.findElement(addElement).click();
         ScreenShotHelper.takeScreenShotAndAdToHTMLReport(driver, Status.INFO, "Add Element");
+    }
 
+    public void btnRemoveElement(){
+        WebDriverWait wait=new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(removeElement)));
         driver.findElement(removeElement).click();
         ScreenShotHelper.takeScreenShotAndAdToHTMLReport(driver, Status.INFO, "Remove Element");
 
+    }
+
+    public boolean isElementListEmpty() {
+        return driver.findElements(removeElement).isEmpty();
     }
 }

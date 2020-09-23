@@ -2,14 +2,7 @@ package Pages;
 
 import com.aventstack.extentreports.Status;
 import helper.ScreenShotHelper;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-
-import java.io.File;
-import java.io.IOException;
+import org.openqa.selenium.*;
 
 public class CheckPage extends BasePage {
     private By check1 = By.xpath("//body//input[1]");
@@ -17,10 +10,21 @@ public class CheckPage extends BasePage {
     public CheckPage(WebDriver driver) {
         super(driver);
     }
-    public void checkUnCheck(){
+    public void check(){
         driver.findElement(check1).click();
         ScreenShotHelper.takeScreenShotAndAdToHTMLReport(driver, Status.INFO, "FirstCheck");
+    }
+
+    public void unCheck(){
         driver.findElement(check2).click();
         ScreenShotHelper.takeScreenShotAndAdToHTMLReport(driver, Status.INFO, "SecondUnCheck");
+    }
+
+    public boolean verifyCheck1() {
+        return driver.findElement(check1).isSelected();
+    }
+
+    public boolean verifyCheck2() {
+        return driver.findElement(check2).isSelected();
     }
 }

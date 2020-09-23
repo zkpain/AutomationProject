@@ -2,6 +2,8 @@ package Tests;
 
 import Pages.CheckPage;
 import Pages.HomePage;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CheckUnCheckTest extends BaseTest {
@@ -10,7 +12,10 @@ public class CheckUnCheckTest extends BaseTest {
         HomePage homePage = new HomePage(webDriver);
         homePage.clicLinkCheck();
         CheckPage checkPage = new CheckPage(webDriver);
-        checkPage.checkUnCheck();
+        checkPage.check();
+        Assert.assertEquals(checkPage.verifyCheck1(), true);
+        checkPage.unCheck();
+        Assert.assertEquals(checkPage.verifyCheck2(), false);
     }
 
 }
